@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<title>Live Chat</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+	<link rel="stylesheet" href="style.css">
+
+
+</head>
+<body ng-app="chatbot" ng-controller="cont">
+
+	<div id="live-chat">
+
+		<header class="clearfix">
+
+
+
+			<h4>CHat-Bot</h4>
+
+			<span class="chat-message-counter">{{count+1}}</span>
+
+		</header>
+
+		<div class="chat">
+
+			<div class="chat-history">
+        <div  ng-repeat="i in data.questions | limitTo: count+1">
+				<div class="chat-message clearfix">
+
+					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-c282LSgrTzmnloPowNaX99-g8AsxyfhlS9RnEdZjowarOwHEQg"
+           alt="" width="32" height="32">
+
+					<div class="chat-message-content clearfix">
+
+						<span class="chat-time">13:35</span>
+
+						<h5>Chat-Bot</h5>
+            <script>
+            // console.log(c);
+
+              setTimeout(()=>{
+                document.getElementsByClassName("ques")[c].style="display:block";
+                document.getElementsByClassName("typing")[c].style="display:none";
+                if(c==1){
+                  setTimeout(()=>{
+                  document.getElementsByClassName("train")[c].style="display:block";},1000);
+                }
+              }, 2000);
+            </script>
+            <img class="typing" style="display: block;" src="https://loading.io/spinners/typing/lg.-text-entering-comment-loader.gif"
+             alt="" width="50" height="50">
+
+						<p class="ques" style="display: none;">
+                {{i.question}}<p class="more" style="display:none;"><br>
+									<script>if(c==3) setTimeout(()=>{document.getElementsByClassName("more")[3].style="display:block;"},1000);</script>
+		              <img src="http://otromexico.com/wp-content/uploads/2017/10/giphy-2-1.gif" height="150px">
+									Please Provide Your Email to stay connect
+
+		            </p>
+            </p>
+            <p class="train" style="display: none;"><br>
+              <span class="rcorners1" onclick="
+                                  document.getElementsByClassName('train')[c].style='display:none';
+              " ng-click="checkpnr()">PNR Status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <br><br><br><span onclick="
+                                  document.getElementsByClassName('train')[c].style='display:none';
+                                  document.getElementsByClassName('avail')[c].style='display:block';
+                    "class="rcorners1">Seat Availability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <br><br><br><span class="rcorners1">More &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+
+            </p>
+            <p class="avail" style="display: none;">
+              <span class="demo-container"><br>
+                <input type="number" ng-model="trainNumber" placeholder="Enter Train Number" style="width:100px;" required/><br>
+                <input type="text" ng-model="source" placeholder="From" style="width:100px;" required/><br>
+                <input type="text" ng-model="dest" placeholder="to" style="width:100px;" required/><br>
+
+														<span class="external-container">
+										            <select id="demo-non-form" ng-model="selectedVal" mobiscroll-select="nonFormSettings">
+										                <option value="1A">1A</option>
+										                <option value="2A">2A</option>
+										                <option value="FC">FC</option>
+										                <option value="3A">3A</option>
+										                <option value="CC">CC</option>
+										                <option value="SL">SL</option>
+										                <option value="2S">2S</option>
+										            </select>
+										        </span>
+
+
+
+                <input ng-model="header" mobiscroll-calendar="headerSettings" placeholder="Enter Date" required /><br>
+                <span ng-click="checkseat(trainNumber,source,dest,selectedVal,header)" onclick="
+														document.getElementsByClassName('avail')[c].style='display:none;'
+                "><img src="https://www.shareicon.net/data/512x512/2016/08/20/817721_check_512x512.png" width="35px"></span>
+
+              </span>
+            </p>
+
+					</div>
+
+				</div>
+
+				<hr>
+
+				<div class="chat-message clearfix" ng-if="i.answer!==''">
+
+					<img src="data:image/png;base64,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" alt="" width="32" height="32">
+
+					<div class="chat-message-content clearfix">
+
+						<span class="chat-time">13:37</span>
+
+						<h5>{{user}}</h5>
+
+						<p>{{i.answer}}</p>
+
+					</div> <!-- end chat-message-content -->
+
+				</div> <!-- end chat-message -->
+
+				<hr>
+
+        <div id="last"></div>
+</div>
+
+			</div> <!-- end chat-history -->
+
+
+			<form action="#" method="post">
+
+				<fieldset ng-show="count!==1">
+
+					<input type="text" placeholder="Type your message…" ng-model="answer" autofocus>
+          <div ng-click="ansSub()">Submit</div>
+					<input type="hidden">
+
+				</fieldset>
+
+			</form>
+
+		</div>
+
+	</div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+  <link href="css/mobiscroll.angularjs.min.css" rel="stylesheet" />
+  <script src="js/mobiscroll.angularjs.min.js"></script>
+	<script src="index.js"></script>
+</body>
+</html>
