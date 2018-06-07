@@ -11,14 +11,13 @@
 
 </head>
 <body ng-app="chatbot" ng-controller="cont">
-
 	<div id="live-chat">
 
 		<header class="clearfix">
 
 
 
-			<h4>CHat-Bot</h4>
+			<h4>Chat-Bot</h4>
 
 			<span class="chat-message-counter">{{count+1}}</span>
 
@@ -26,7 +25,7 @@
 
 		<div class="chat">
 
-			<div class="chat-history">
+			<div class="chat-history"  style="overflow: auto">
         <div  ng-repeat="i in data.questions | limitTo: count+1">
 				<div class="chat-message clearfix">
 
@@ -54,22 +53,33 @@
              alt="" width="50" height="50">
 
 						<p class="ques" style="display: none;">
-                {{i.question}}<p class="more" style="display:none;"><br>
+                {{i.question}}
+								<p class="more" style="display:none;"><br>
 									<script>if(c==3) setTimeout(()=>{document.getElementsByClassName("more")[3].style="display:block;"},1000);</script>
-		              <img src="http://otromexico.com/wp-content/uploads/2017/10/giphy-2-1.gif" height="150px">
+									<span ng-if="enjoy==true"><img src="http://otromexico.com/wp-content/uploads/2017/10/giphy-2-1.gif" height="150px"></span>
+		              <span ng-if="enjoy==false"><img src="http://media.tumblr.com/tumblr_lqqxa5sQ1G1qif47l.gif" height="150px"></span>
 									Please Provide Your Email to stay connect
 
 		            </p>
+								<p class="cust" style="display:none;"><br>
+									<script>if(c==5) setTimeout(()=>{document.getElementsByClassName("cust")[5].style="display:block;"},3000);</script>
+									<span class="rcorners1" ng-click="cusYes()" onclick="document.getElementsByClassName('cust')[5].style='display:none;'">
+										 YES</span>&nbsp;
+									<span class="rcorners1" ng-click="cusNo()" onclick="document.getElementsByClassName('cust')[5].style='display:none;'">
+	 										NO</span>
+		            </p>
+								<p class="custYes" style="display:none;"></p>
+								<p class="custNo" style="display:none;"></p>
+
             </p>
             <p class="train" style="display: none;"><br>
               <span class="rcorners1" onclick="
                                   document.getElementsByClassName('train')[c].style='display:none';
-              " ng-click="checkpnr()">PNR Status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <br><br><br><span onclick="
+              " ng-click="checkpnr();" scroll-bottom="bottom">PNR Status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <br><br><br><span onclick="selectCat();
                                   document.getElementsByClassName('train')[c].style='display:none';
                                   document.getElementsByClassName('avail')[c].style='display:block';
                     "class="rcorners1">Seat Availability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <br><br><br><span class="rcorners1">More &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
 
             </p>
@@ -94,9 +104,10 @@
 
 
                 <input ng-model="header" mobiscroll-calendar="headerSettings" placeholder="Enter Date" required /><br>
-                <span ng-click="checkseat(trainNumber,source,dest,selectedVal,header)" onclick="
+                <span ng-click="checkseat(trainNumber,source,dest,selectedVal,header);" scroll-bottom="bottom" onclick="
+														selectCat();
 														document.getElementsByClassName('avail')[c].style='display:none;'
-                "><img src="https://www.shareicon.net/data/512x512/2016/08/20/817721_check_512x512.png" width="35px"></span>
+                "><img src="https://www.freeiconspng.com/uploads/check-mark-tick-mark-check-png-31.png" width="35px"></span>
 
               </span>
             </p>
@@ -124,19 +135,17 @@
 				</div> <!-- end chat-message -->
 
 				<hr>
-
-        <div id="last"></div>
+<a name="last"></a>
 </div>
-
 			</div> <!-- end chat-history -->
 
 
 			<form action="#" method="post">
 
-				<fieldset ng-show="count!==1">
+				<fieldset ng-show="count!==1&&count!==5">
 
-					<input type="text" placeholder="Type your message…" ng-model="answer" autofocus>
-          <div ng-click="ansSub()">Submit</div>
+					<input id="enteringText" type="text" placeholder="Type your message…" ng-model="answer" autofocus>
+          <div ng-click="ansSub();" onclick="selectCat();"scroll-bottom="bottom">Submit</div>
 					<input type="hidden">
 
 				</fieldset>
@@ -149,8 +158,9 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
-  <link href="css/mobiscroll.angularjs.min.css" rel="stylesheet" />
-  <script src="js/mobiscroll.angularjs.min.js"></script>
+
+  <!-- <link href="css/mobiscroll.angularjs.min.css" rel="stylesheet" />
+  <script src="js/mobiscroll.angularjs.min.js"></script> -->
 	<script src="index.js"></script>
 </body>
 </html>
